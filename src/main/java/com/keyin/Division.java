@@ -9,9 +9,15 @@ public class Division {
     private String endBirthYear;
 
     public boolean isPlayerEligible(Player player) {
-      String playerBirthYear = String.valueOf(player.getBirthday().get(Calendar.YEAR));
+        Calendar playerBirthday = player.getBirthday();
+        if(playerBirthday != null) {
+            String playerBirthYear = String.valueOf(playerBirthday.get(Calendar.YEAR));
 
-      return playerBirthYear.equals(startBirthYear) || playerBirthYear.equals(endBirthYear);
+            return Integer.parseInt(startBirthYear)
+                    <= Integer.parseInt(playerBirthYear) &&
+                    Integer.parseInt(endBirthYear) >= Integer.parseInt(playerBirthYear);
+        }
+        return false;
     };
 
     public long getId() {
